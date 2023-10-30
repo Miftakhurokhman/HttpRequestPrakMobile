@@ -32,9 +32,11 @@ class HalamanUsers extends StatelessWidget {
                       ),
                       title: Text(user.firstName! + " " + user.lastName!),
                       subtitle: Text("${user.email}"),
-                      onTap: () {
+                      onTap: () async {
+                        final id = user.id; // Ambil ID pengguna dari data pengguna
+                        final detailData = await ApiDataSource.instance.loadDetailUser(id!);
                         Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return halamanDetail(user: user);
+                          return halamanDetail(detailData: detailData);
                         }));
                       }
                     );

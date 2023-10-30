@@ -1,18 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:materi_api/api_data_source.dart';
-import 'package:materi_api/halaman_detail.dart';
-import 'package:materi_api/user_model.dart';
 import 'package:materi_api/user_model.dart';
 
 class halamanDetail extends StatelessWidget {
-  final Data user;
-  const halamanDetail({super.key, required this.user});
+  final Map<String, dynamic> detailData;
+  const halamanDetail({super.key, required this.detailData});
 
   @override
   Widget build(BuildContext context) {
+    final userData = detailData['data'];
+    final user = Data.fromJson(userData);
     return Scaffold(
       appBar: AppBar(
         title: Text("Detail User"),
@@ -21,9 +18,15 @@ class halamanDetail extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            Image(image: NetworkImage(user.avatar!)),
-            Text(user.firstName! + " " + user.lastName!),
-            Text(user.email!),
+            user.avatar != null
+                ? Image(image: NetworkImage(user.avatar!))
+                : Text("Image not found"),
+            user.firstName != null && user.lastName != null
+                ? Text(user.firstName! + " " + user.lastName!)
+                : Text("Name not found"),
+            user.email != null
+                ? Text(user.email!)
+                : Text("Email not found"),
           ],
         ),
       ),
