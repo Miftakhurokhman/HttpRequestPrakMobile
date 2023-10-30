@@ -6,5 +6,4 @@ class ApiDataSource {
   Future<Map<String, dynamic>> loadUsers() {
     return BaseNetwork.get("users");
   }
-
 }

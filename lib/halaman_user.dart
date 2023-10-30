@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:materi_api/api_data_source.dart';
+import 'package:materi_api/halaman_detail.dart';
 import 'package:materi_api/user_model.dart';
 
 class HalamanUsers extends StatelessWidget {
@@ -10,7 +11,7 @@ class HalamanUsers extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Aplikasi Pinjol"),
+        title: Text("WasAp"),
         backgroundColor: Colors.teal,
       ),
       body: FutureBuilder(
@@ -31,6 +32,11 @@ class HalamanUsers extends StatelessWidget {
                       ),
                       title: Text(user.firstName! + " " + user.lastName!),
                       subtitle: Text("${user.email}"),
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) {
+                          return halamanDetail(user: user);
+                        }));
+                      }
                     );
                   },
               );
